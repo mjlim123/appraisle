@@ -17,8 +17,10 @@ with open('GoodVideos.csv', mode ='r') as file:
  
   # displaying the contents of the CSV file
   for lines in csvFile:
-    doc_ref = db.collection('videos').document(str(uuid.uuid1()))
+    count = 1
+    doc_ref = db.collection('videos').document(str(count))
     doc_ref.set({
       'Price':int(lines[0]),
       'urlEmbed':lines[1]
     })
+    count += 1

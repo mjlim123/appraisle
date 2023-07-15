@@ -40,50 +40,50 @@ while 1:
         break
 
 
-# for i in range(len(videos)):
-#     video_url = 'https://www.youtube.com/embed/'+videos[i]['snippet']['resourceId']['videoId']+'?controls=0&amp;start=300&autoplay=1'
-#     thumbnail_url = videos[i]['snippet']['thumbnails']['high']['url']
-#     urllib.request.urlretrieve(thumbnail_url, "thumbnail.png")
+for i in range(len(videos)):
+    video_url = 'https://www.youtube.com/embed/'+videos[i]['snippet']['resourceId']['videoId']+'?controls=0&amp;start=300&autoplay=1'
+    thumbnail_url = videos[i]['snippet']['thumbnails']['high']['url']
+    urllib.request.urlretrieve(thumbnail_url, "thumbnail.png")
 
-#     image = cv2.imread('thumbnail.png')
-#     # gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
-#     # thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)[1]
+    image = cv2.imread('thumbnail.png')
+    # gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+    # thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY_INV + cv2.THRESH_OTSU)[1]
 
-#     reader = easyocr.Reader(['en'])
-#     results = reader.readtext(image, detail=0)
+    reader = easyocr.Reader(['en'])
+    results = reader.readtext(image, detail=0)
 
-#     price = ""
+    price = ""
 
-#     try:
-#         string = results[0][1:].lower()
-#         string = string.replace('/', '')
-#         string = string.replace(' ', '')
-#         string = string.replace('.','')
-#         string = string.replace(',','')
-#         if 'million' in string:
-#             string = string.replace(' ', '')
-#             string = string.replace('.','')
-#             string = string.replace('million', '000000')
-#             price = int(string)
-#         else:
-#             price = int(string)
-#             with open('GoodVideos.csv', 'r+') as file:
-#                 data = str(price)+','+video_url + '\n'
-#                 contents = file.read()
-#                 if data in contents:
-#                     print("Already accounted for")
-#                 else:
-#                     file.write(data)
-#                     file.close()
-#     except:
-#         print("Wrong?")
-#         print(results)
-#         with open('ProblemVideos.txt', 'r+') as file:
-#             contents = file.read()
-#             if thumbnail_url in contents:
-#                 print("Already accounted for")
-#                 pass
-#             else:
-#                 file.write(thumbnail_url+'\n')
-#                 file.close()
+    try:
+        string = results[0][1:].lower()
+        string = string.replace('/', '')
+        string = string.replace(' ', '')
+        string = string.replace('.','')
+        string = string.replace(',','')
+        if 'million' in string:
+            string = string.replace(' ', '')
+            string = string.replace('.','')
+            string = string.replace('million', '000000')
+            price = int(string)
+        else:
+            price = int(string)
+            with open('GoodVideos.csv', 'r+') as file:
+                data = str(price)+','+video_url + '\n'
+                contents = file.read()
+                if data in contents:
+                    print("Already accounted for")
+                else:
+                    file.write(data)
+                    file.close()
+    except:
+        print("Wrong?")
+        print(results)
+        with open('ProblemVideos.txt', 'r+') as file:
+            contents = file.read()
+            if thumbnail_url in contents:
+                print("Already accounted for")
+                pass
+            else:
+                file.write(thumbnail_url+'\n')
+                file.close()
 
