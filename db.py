@@ -16,8 +16,8 @@ with open('GoodVideos.csv', mode ='r') as file:
   csvFile = csv.reader(file)
  
   # displaying the contents of the CSV file
+  count = 2
   for lines in csvFile:
-    count = 1
     doc_ref = db.collection('videos').document(str(count))
     doc_ref.set({
       'Price':int(lines[0]),

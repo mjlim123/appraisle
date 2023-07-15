@@ -41,7 +41,7 @@ while 1:
 
 
 for i in range(len(videos)):
-    video_url = 'https://www.youtube.com/embed/'+videos[i]['snippet']['resourceId']['videoId']+'?controls=0&amp;start=300&autoplay=1'
+    video_url = videos[i]['snippet']['resourceId']['videoId']
     thumbnail_url = videos[i]['snippet']['thumbnails']['high']['url']
     urllib.request.urlretrieve(thumbnail_url, "thumbnail.png")
 
