@@ -35,7 +35,7 @@ export default function Video({videoID}) {
       playerVars: {
         // https://developers.google.com/youtube/player_parameters
         autoplay: 1,
-        controls: 1,
+        controls: 0,
       },
     };
     useEffect(() => {
@@ -69,15 +69,18 @@ export default function Video({videoID}) {
     }
 
       return (
-        <div className='ytplayer'>
-            <YouTube iframeClassName="video"  videoId={videoID} opts={opts} onReady={onReady} />
-            <div className='mediaControls'>
-              <button onClick={rewind} className='mediaButton'><img className='mediaIcon' src='rewind-button.png'/></button>
-              <button onClick={play} className='mediaButton'><img className='mediaIcon' src='play.png'/></button>
-              <button onClick={pause} className='mediaButton'><img className='mediaIcon' src='pause.png'/></button>
-              <button onClick={fastforward} className='mediaButton'><img className='mediaIcon' src='fast-forward.png'/></button>
-            </div>
-        </div>
-        
+        <div>
+            
+            <div className='ytplayer'>
+              <div className="titleHeader">APPRAISLE</div>
+                <YouTube iframeClassName="video"  videoId={videoID} opts={opts} onReady={onReady} />
+                  <div className='mediaControls'>
+                    <button onClick={rewind} className='mediaButton'><img className='mediaIcon' src='rewind-button.png'/></button>
+                    <button onClick={play} className='mediaButton'><img className='mediaIcon' src='play.png'/></button>
+                    <button onClick={pause} className='mediaButton'><img className='mediaIcon' src='pause.png'/></button>
+                    <button onClick={fastforward} className='mediaButton'><img className='mediaIcon' src='fast-forward.png'/></button>
+                  </div>
+          </div>
+      </div>
       )
 }

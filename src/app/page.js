@@ -1,34 +1,31 @@
-import Guess from "./components/guess";
+
+import Attempts from "./components/Attempts";
+import Guess from "./components/Guess";
 import Video from "./components/Video";
-import { db } from "../../firebase"
-import { collection, getDocs } from "firebase/firestore";
+import { client } from "mongodb"
 
-
+const { MongoClient } = require('mongodb');
 
 async function Home() {
 
-  var videos = []
+  const uri = "mongodb://localhost:27017";
+  const client = new MongoClient(uri);
+  const database = client.db("appraisle").collection("videos");
+  const chooseRandom = await database.aggregate([{$sample : {size: 1}}]).toArray();
 
-  const querySnapshot = await getDocs(collection(db, "videos"));
-  querySnapshot.forEach((doc) => {
-  // doc.data() is never undefined for query doc snapshots
-  videos.push(doc.data());
-  });
+  const randomVideo = chooseRandom[0].videoID;
+  const randomPrice = chooseRandom[0].Price;
 
-  const randomNumber = Math.floor(Math.random() * videos.length)
-
-  const randomVideo = videos[randomNumber]["urlEmbed"]
-  const randomPrice = videos[randomNumber]["Price"]
-  console.log(randomVideo);
-
-
+  console.log(randomPrice, randomVideo)
 
 
   return (
       <div>
-        <div className="rectangle"></div>
-        <Video videoID={randomVideo}/>
-        <Guess answer={randomPrice}/>
+        <div className="mainContainer">
+          <Video videoID={randomVideo}/>
+          <Guess answer={randomPrice}/>
+        </div>
+        
       </div>
     )
   }
