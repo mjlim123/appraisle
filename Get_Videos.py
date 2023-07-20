@@ -16,6 +16,7 @@ def get_videos(videos):
     good_videos = []
     count = 1
     for i in range(len(videos)):
+        title = videos[i]['snippet']['title']
         video_id = videos[i]['snippet']['resourceId']['videoId']
         thumbnail_url = videos[i]['snippet']['thumbnails']['high']['url']
         description = videos[i]['snippet']['description']
@@ -50,7 +51,8 @@ def get_videos(videos):
                 'id' : count,
                 'videoID' : video_id,
                 'price' : price,
-                'description' : description
+                'description' : description,
+                'title' : title,
             }
             good_videos.append(item)
             count += 1
@@ -140,15 +142,27 @@ def addToDB(listOfObj):
         col.insert_one(item)
     
 
+def addField(videos):
+    client = MongoClient('mongodb://localhost:27017')
+    db = client['appraisle']
+    col = db['videos']
+
+    for i in range(len(videos)):
+        col.update_one({'id' : videos[i]['id']}, {'$set' : {'title' : videos[i]['title']}})
+
+
 
 
 videos = fetchYoutube()
 goodVideos = get_videos(videos)
-for item in goodVideos:
-    print(item['id'])
 
-cleaned = cleanDesc(goodVideos)
-addToDB(cleaned)
+addField(goodVideos)
+
+
+
+
+# cleaned = cleanDesc(goodVideos)
+# addToDB(cleaned)
 
 # for i in range(len(test)):
 #     if "Specs:" in test[i]:
