@@ -11,7 +11,7 @@ export default function Attempts({guesses}) {
                     <div>{guess.guess}</div>
                     <div>{guess.highOrLow}</div>
                 </div>
-        )}
+                )}
         </div>
         
     )

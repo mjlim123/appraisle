@@ -48,6 +48,23 @@ input::-webkit-inner-spin-button {
   background: rgb(32, 49, 28);
 }
 
+.credits {
+  font-size: 20px;
+  text-align: left;
+  font-family:\'Trebuchet MS\', \'Lucida Sans Unicode\', \'Lucida Grande\', \'Lucida Sans\', Arial, sans-serif;
+  color:white;
+}
+
+
+.description {
+  white-space: pre-wrap;
+  font-size: 20px;
+  text-align: left;
+  font-family:\'Trebuchet MS\', \'Lucida Sans Unicode\', \'Lucida Grande\', \'Lucida Sans\', Arial, sans-serif;
+  color:white;
+}
+
+
 .guessButtonStyling {
   height: 30px;
   width: 300px;
@@ -81,6 +98,9 @@ input::-webkit-inner-spin-button {
   border-radius: 7px;
   border-width: 2px;
 }
+
+
+
 
 .home-bg {
   background-color: rgb(32, 49, 28);

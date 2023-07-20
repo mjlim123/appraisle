@@ -14,16 +14,16 @@ async function Home() {
   const chooseRandom = await database.aggregate([{$sample : {size: 1}}]).toArray();
 
   const randomVideo = chooseRandom[0].videoID;
-  const randomPrice = chooseRandom[0].Price;
+  const randomPrice = chooseRandom[0].price;
+  const randomDescription = chooseRandom[0].description;
 
-  console.log(randomPrice, randomVideo)
 
 
   return (
       <div>
         <div className="mainContainer">
           <Video videoID={randomVideo}/>
-          <Guess answer={randomPrice}/>
+          <Guess answer={randomPrice} description={randomDescription}/>
         </div>
         
       </div>

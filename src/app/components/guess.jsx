@@ -1,9 +1,10 @@
 "use client"
+import Description from "./Description"
 import { use, useState } from "react";
 import Attempts from "./Attempts";
 
 
-export default function Guess({answer}) {
+export default function Guess({answer, description}) {
 
     const [winOrLose, setWinOrLose] = useState(null)
     const [gameover, setGameover] = useState(false)
@@ -96,7 +97,8 @@ export default function Guess({answer}) {
                 <h1 className="instructionsText"> Guess how much this property costs within 10% to win!</h1>                
             </div>
             <Attempts guesses={guesses}/>
-            <div className="credits">{gameover ? `You ${winOrLose ? 'Win!' : 'Lose!'}` : null}</div>
+            <Description videoDescription={description}/>
+            <h1 className="credits">{gameover ? `You ${winOrLose ? 'Win!' : 'Lose!'}` : null}</h1>
         </div>
             
     )
